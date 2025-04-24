@@ -19,12 +19,12 @@ class SteadyDiffusion1D():
         # Central differencing scheme
         # Computing generic a_W, a_E = a_WE_nodes since dx is constant:
         node_list = self.mesh.nodes
-        a_WE_nodes = [self.diffusion_coef * node.cross_section_node / node.dx_node for node in node_list]
+        a_WE_nodes = [self.diffusion_coef * node.cross_section / node.dx for node in node_list]
         
         a_P_middle_nodes = [a_WE_nodes[node_id - 1] + a_WE_nodes[node_id + 1]  for node_id in range(1, self.nb_nodes - 1)]
 
-        a_P_west_node = a_WE_nodes[1] + 2 * self.diffusion_coef * node_list[0].cross_section_node / node_list[0].dx_node
-        a_P_east_node = a_WE_nodes[-2] + 2 * self.diffusion_coef * node_list[-1].cross_section_node / node_list[-1].dx_node
+        a_P_west_node = a_WE_nodes[1] + 2 * self.diffusion_coef * node_list[0].cross_section / node_list[0].dx
+        a_P_east_node = a_WE_nodes[-2] + 2 * self.diffusion_coef * node_list[-1].cross_section / node_list[-1].dx
 
         a_P_nodes = [a_P_west_node, *a_P_middle_nodes, a_P_east_node]
 
@@ -40,8 +40,8 @@ class SteadyDiffusion1D():
     
     def set_boundary_conditions(self):
         boundary_condition_vector = np.zeros(self.nb_nodes)
-        boundary_condition_vector[0] = 2 * self.diffusion_coef * self.mesh.cross_section_west * self.boundary_conditions.phi_west_BC / self.mesh.nodes[0].dx_node
-        boundary_condition_vector[-1] = 2 * self.diffusion_coef * self.mesh.cross_section_east * self.boundary_conditions.phi_east_BC / self.mesh.nodes[-1].dx_node
+        boundary_condition_vector[0] = 2 * self.diffusion_coef * self.mesh.cross_section_west * self.boundary_conditions.phi_west_BC / self.mesh.nodes[0].dx
+        boundary_condition_vector[-1] = 2 * self.diffusion_coef * self.mesh.cross_section_east * self.boundary_conditions.phi_east_BC / self.mesh.nodes[-1].dx
         return boundary_condition_vector
 
     def solve(self):
@@ -53,7 +53,7 @@ class SteadyDiffusion1D():
 
     def display_solution(self):
         assert self.solution is not None, "You must solve your problem before displaying the solution"
-        x_position_list = [0., *[display_node.x_node for display_node in self.mesh.nodes], self.mesh.domain_length]
+        x_position_list = [0., *[display_node.x for display_node in self.mesh.nodes], self.mesh.domain_length]
         value_list = [self.boundary_conditions.phi_west_BC, *self.solution, self.boundary_conditions.phi_east_BC]
         
         plt.plot(
