@@ -16,7 +16,7 @@ class Mesh1D():
         self.domain_length = domain_length
 
     def display_mesh(self):        
-        x_position_list = np.array([0., *[display_node.x_node for display_node in self.nodes], self.domain_length])
+        x_position_list = np.array([0., *[display_node.x for display_node in self.nodes], self.domain_length])
         node_center_list = np.zeros_like(x_position_list)
         plt.plot(
             x_position_list,
@@ -24,7 +24,7 @@ class Mesh1D():
             '-o',
             color="black",
         )
-        node_upper_list = np.array([self.cross_section_west / 2, *[display_node.cross_section_node / 2 for display_node in self.nodes], self.cross_section_east / 2])
+        node_upper_list = np.array([self.cross_section_west / 2, *[display_node.cross_section / 2 for display_node in self.nodes], self.cross_section_east / 2])
         node_lower_list = -node_upper_list
         plt.plot(
             x_position_list,

@@ -1,8 +1,8 @@
 class Node1D():
-    def __init__(self, x_node: float, dx_node: float, cross_section_node: float):
-        self.x_node = x_node
-        self.dx_node = dx_node
-        self.cross_section_node = cross_section_node
+    def __init__(self, x: float, dx: float, cross_section: float):
+        self.x = x
+        self.dx = dx
+        self.cross_section = cross_section
 
         self.vars = dict()
 
