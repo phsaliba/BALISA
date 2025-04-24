@@ -4,14 +4,16 @@ from Mesh.mesh_1d import *
 from Solver.boundary_conditions_1d import *
 
 class SteadyDiffusion1D():
-    def __init__(self, mesh: Mesh1D, boundary_conditions: BoundaryConditions1D, diffusion_coef: float):
+    def __init__(self, mesh: Mesh1D, boundary_conditions: BoundaryConditions1D, diffusion_coef: float, varname="phi"):
         self.mesh = mesh
         self.nb_nodes = len(mesh.nodes)
         self.boundary_conditions = boundary_conditions
         self.diffusion_coef = diffusion_coef
+        self.varname = varname
 
         self.coefficient_matrix = self.set_diffusion_equation_coefs()
         self.boundary_condition_vector = self.set_boundary_conditions()
+        self.solution = None
 
     def set_diffusion_equation_coefs(self):        
         # Central differencing scheme
@@ -43,10 +45,23 @@ class SteadyDiffusion1D():
         return boundary_condition_vector
 
     def solve(self):
+        solution = np.matmul(np.linalg.inv(self.coefficient_matrix), self.boundary_condition_vector)
+        for node_value, node in zip(solution, self.mesh.nodes):
+            node.vars[self.varname] = node_value
+        self.solution = solution
+    
 
-
-        return 
-
+    def display_solution(self):
+        assert self.solution is not None, "You must solve your problem before displaying the solution"
+        x_position_list = [0., *[display_node.x_node for display_node in self.mesh.nodes], self.mesh.domain_length]
+        value_list = [self.boundary_conditions.phi_west_BC, *self.solution, self.boundary_conditions.phi_east_BC]
+        
+        plt.plot(
+            x_position_list,
+            value_list,
+            '-o',
+            color="black",
+        )
 
 
 
