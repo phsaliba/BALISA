@@ -13,7 +13,6 @@ class Mesh2D():
         self.nodes = nodes
         self.vertical_length = vertical_length
         self.horizontal_length = horizontal_length
-        self.domain_length = domain_length
 
     def display_mesh(self):        
         raise NotImplementedError("be patient")
