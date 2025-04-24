@@ -62,6 +62,9 @@ class SteadyDiffusion1D():
             '-o',
             color="black",
         )
+        plt.xlabel("X")
+        plt.ylabel(self.varname)
+        plt.show()
 
 
 
