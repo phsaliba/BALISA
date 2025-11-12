@@ -49,8 +49,6 @@ class Mesh1D():
             self.east_bc.to_csv(mesh_file)
 
 
-
-
 def create_constant_section_mesh_1d(
     domain_length: float,
 	cross_section: float,
