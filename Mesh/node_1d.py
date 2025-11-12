@@ -5,4 +5,4 @@ class Node1D():
         self.cross_section = cross_section
 
     def to_csv(self, mesh_file):
-        mesh_file.write(f"{self.node_id} {self.x} {self.cross_section}\n")
+        mesh_file.write(f"{self.node_id}, {self.x}, {self.cross_section}\n")

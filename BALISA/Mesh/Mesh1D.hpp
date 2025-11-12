@@ -8,8 +8,19 @@ using std::vector;
 
 class Mesh1D{
     public:
-        Mesh1D(std::vector<Node1D> input_node_vector, double input_west_area, double input_east_area, double input_east_x, double input_west_x);
-
+        Mesh1D(
+            vector<Node1D> input_node_vector,
+            double input_west_area,
+            double input_east_area,
+            double input_east_x,
+            double input_west_x
+        );
+        Mesh1D(
+            vector<Node1D> input_node_vector,
+            Node1D west_bc,
+            Node1D east_bc
+        );
+        Mesh1D(string mesh_path);
         int get_mesh_size();
         Node1D* get_node(int node_id);
         void display_mesh_data();

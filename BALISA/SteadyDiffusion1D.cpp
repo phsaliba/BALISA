@@ -85,7 +85,6 @@ void SteadyDiffusion1D::display_solution() {
 		for (string var_name : transported_vars) {
 			printf("%s = %.2lf", var_name.c_str(), node_to_print.transported_vars[var_name]);
 		}
-		printf(" vs %.2lf", 800. * node_to_print.get_x() + 100.);
     };
     printf("\n");
 }
