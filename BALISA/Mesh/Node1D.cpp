@@ -4,8 +4,6 @@ Node1D::Node1D(int input_id, double input_x, double input_area){
     node_id = input_id;
     x = input_x;
     area = input_area;
-
-    map<string, double> transported_vars;
 }
 
 void Node1D::display_node_data(){
