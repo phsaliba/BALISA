@@ -43,7 +43,6 @@ class Mesh1D():
 
     def save_mesh(self, mesh_path: Path):
         with mesh_path.open("w") as mesh_file:
-            mesh_file.write("node_id, x, area")
             self.west_bc.to_csv(mesh_file)
             for node in self.nodes:
                 node.to_csv(mesh_file)
