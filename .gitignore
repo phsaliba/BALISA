@@ -15,3 +15,4 @@ BALISA/x64/
 eigen-5.0.0/
 *node
 *workspace
+Mesh/__pycache__/
