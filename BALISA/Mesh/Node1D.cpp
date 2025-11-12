@@ -5,11 +5,6 @@ Node1D::Node1D(int input_id, double input_x, double input_area){
     x = input_x;
     area = input_area;
 
-    p = 1.;
-    rho = 1.;
-    ts = 1.;
-    internal_energy = 1.;
-
     map<string, double> transported_vars;
 }
 

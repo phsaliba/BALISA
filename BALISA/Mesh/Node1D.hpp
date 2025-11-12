@@ -8,11 +8,6 @@ using std::map;
 
 class Node1D{
     public:
-        double p;
-        double rho;
-        double ts;
-        double internal_energy;
-
         map<string, double> transported_vars;
         Node1D(int node_id, double x, double area);
 
